@@ -96,5 +96,6 @@ export default async function startZoomClass(link: string, numberClass: number):
     await frame.click('button[class="zm-btn zm-btn-legacy zm-btn--primary zm-btn__outline--blue"]');
 
     console.log(`Задача закончилась в ${Date.now()}`);
-    return;
+
+    await browser.close();
 }
