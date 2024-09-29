@@ -13,7 +13,7 @@
         "experimentalDecorators": true,
         "allowSyntheticDefaultImports": true,
         "target": "es2022",
-        "lib": ["es2022"],
+        "lib": ["es2022", "DOM"],
         "moduleResolution": "node",
         "sourceMap": true,
         "outDir": "./dist",
@@ -29,6 +29,6 @@
         "noFallthroughCasesInSwitch": true,
         "resolveJsonModule": true
     },
-    "include": ["src/**/*", "test/**/*"],
+    "include": ["src/**/*", "test/**/*", "./*.ts", "scripts"],
     "exclude": ["node_modules", "dist"]
 }
