@@ -1,11 +1,14 @@
 import puppeteer from 'puppeteer';
-import { formatTime } from './utils/formatTime';
+import formatTime from '../src/utils/formatTime';
+import getCurrentDay from '../src/utils/getCurrentDay';
+import logger from '../src/utils/logger';
 
 export default async function startZoomClass(link: string, numberClass: number): Promise<void> {
     const now = new Date();
-    const dayOfWeek = now.getDay();
+    const dayOfWeek = getCurrentDay();
     const time = formatTime(now);
-    console.log(`Выполняется задача в ${dayOfWeek} ${time} - ${numberClass} пара`, Date.now());
+
+    logger.info(`Выполняется задача в ${dayOfWeek} ${time} - ${numberClass} пара`);
 
     const browser = await puppeteer.launch({
         headless: false,
@@ -25,10 +28,8 @@ export default async function startZoomClass(link: string, numberClass: number):
     await context.overridePermissions('https://app.zoom.us', ['microphone', 'camera']);
 
     const page = await browser.newPage();
-    const page2 = await browser.newPage(); // Для скипа окна браузера зума.
 
-    await page.goto(link);
-    await page2.goto(link);
+    const page2 = await browser.newPage(); // Для скипа окна браузера зума.
 
     await page.setViewport({
         width: 1280,
@@ -41,6 +42,9 @@ export default async function startZoomClass(link: string, numberClass: number):
         height: 720,
         deviceScaleFactor: 1
     });
+
+    await page.goto(link);
+    await page2.goto(link);
 
     await page2.close();
 
@@ -75,7 +79,7 @@ export default async function startZoomClass(link: string, numberClass: number):
 
         await frame.click('div[class="preview-video__control-button-container simple"]');
 
-        console.log('Отлично подключили звук для конференции');
+        logger.info('Отлично подключили звук для конференции');
     } catch {
         await frame.waitForSelector(
             'button[class="zm-btn join-audio-by-voip__join-btn zm-btn--primary zm-btn__outline--white zm-btn--lg"]'
@@ -84,10 +88,11 @@ export default async function startZoomClass(link: string, numberClass: number):
         await frame.click(
             'button[class="zm-btn join-audio-by-voip__join-btn zm-btn--primary zm-btn__outline--white zm-btn--lg"]'
         );
-        console.warn('Конференция уже работает');
+
+        logger.warn('Конференция уже работает и подключили звук');
     }
 
-    console.log('Бот вошел в конференцию');
+    logger.info('Бот вошел в конференцию');
 
     await frame.waitForSelector('button[class="zm-btn zm-btn-legacy zm-btn--primary zm-btn__outline--blue"]', {
         timeout: 0
@@ -95,7 +100,10 @@ export default async function startZoomClass(link: string, numberClass: number):
 
     await frame.click('button[class="zm-btn zm-btn-legacy zm-btn--primary zm-btn__outline--blue"]');
 
-    console.log(`Задача закончилась в ${Date.now()}`);
+    const endDateWork = new Date();
+    const endTime = formatTime(endDateWork);
+
+    logger.info(`Задача закончилась в ${dayOfWeek} ${endTime}`);
 
     await browser.close();
 }

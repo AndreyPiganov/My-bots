@@ -1,0 +1,23 @@
+version: '3.9'
+services:
+    auth_service:
+        container_name: bot
+        restart: always
+        build:
+            context: ./
+            dockerfile: Dockerfile_local
+        expose:
+            - '5555'
+        ports:
+            - '127.0.0.1:5555:5555'
+        volumes:
+            - /app
+            - /app/node_modules
+        environment:
+            - NODE_ENV=${NODE_ENV} #production development
+            - PORT=${PORT}
+            - ODIN_EMAIL=${ODIN_EMAIL}
+            - ODIN_PASSWORD=${ODIN_PASSWORD}
+networks:
+    bot_network:
+        driver: bridge

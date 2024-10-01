@@ -1,0 +1,18 @@
+FROM node:lts-alpine as builder
+
+WORKDIR /app
+
+COPY package*.json /
+
+RUN npm install
+
+COPY . .
+
+RUN mkdir -p var/log
+
+RUN mkdir -p session/odin
+
+EXPOSE 5000
+
+CMD ["npm", "run", "start:build"]
+
