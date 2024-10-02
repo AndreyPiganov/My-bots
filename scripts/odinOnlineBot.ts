@@ -12,7 +12,7 @@ export default async function startOdinOnline(): Promise<void> {
         logger.info(`Бот заходит для показательного онлайна в ${dayOfWeek} ${time}`);
 
         const browser = await puppeteer.launch({
-            headless: false,
+            headless: true,
             args: ['--allow-file-access'],
             userDataDir: './session/odin'
         });

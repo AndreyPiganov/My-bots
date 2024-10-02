@@ -12,7 +12,7 @@ export default async function startZoomClass(link: string, numberClass: number):
         logger.info(`Выполняется задача в ${dayOfWeek} ${time} - ${numberClass} пара`);
 
         const browser = await puppeteer.launch({
-            headless: false,
+            headless: true,
             args: [
                 '--use-fake-ui-for-media-stream', // Автоматически принимает запросы на доступ к микрофону/камере
                 '--use-fake-device-for-media-stream', // Использует фейковые устройства для тестирования

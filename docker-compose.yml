@@ -1,7 +1,7 @@
 version: '3.9'
 services:
-    auth_service:
-        container_name: bot
+    learn_bot:
+        container_name: learn_bot
         restart: always
         build:
             context: ./
