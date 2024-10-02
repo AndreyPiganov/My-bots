@@ -7,11 +7,11 @@ services:
             context: ./
             dockerfile: Dockerfile_local
         expose:
-            - '5555'
+            - '5000'
         ports:
-            - '127.0.0.1:5555:5555'
+            - '127.0.0.1:5000:5000'
         volumes:
-            - /app
+            - ./:/app
             - /app/node_modules
         environment:
             - NODE_ENV=${NODE_ENV} #production development
@@ -19,5 +19,5 @@ services:
             - ODIN_EMAIL=${ODIN_EMAIL}
             - ODIN_PASSWORD=${ODIN_PASSWORD}
 networks:
-    bot_network:
+    learn_bot_network:
         driver: bridge
