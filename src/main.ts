@@ -80,7 +80,7 @@ cron.schedule('15 16 * * 5', async () => {
     await runWithRetries(() => startZoomClass(friday.third, 3));
 });
 
-cron.schedule('55 19 * * 3', async () => {
+cron.schedule('35 20 * * 3', async () => {
     // Тестовый schedule
     await runWithRetries(startOdinOnline);
     await runWithRetries(() => startZoomClass(friday.third, 3));

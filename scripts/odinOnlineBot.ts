@@ -13,7 +13,8 @@ export default async function startOdinOnline(): Promise<void> {
 
         const browser = await puppeteer.launch({
             headless: true,
-            args: ['--allow-file-access'],
+            // executablePath: '/usr/bin/chromium-browser',
+            args: ['--allow-file-access', '--no-sandbox', '--disable-setuid-sandbox'],
             userDataDir: './session/odin'
         });
 

@@ -13,11 +13,14 @@ export default async function startZoomClass(link: string, numberClass: number):
 
         const browser = await puppeteer.launch({
             headless: true,
+            // executablePath: '/usr/bin/chromium-browser',
             args: [
                 '--use-fake-ui-for-media-stream', // Автоматически принимает запросы на доступ к микрофону/камере
                 '--use-fake-device-for-media-stream', // Использует фейковые устройства для тестирования
                 '--use-file-for-fake-audio-capture=./assets/micro.wav',
-                '--allow-file-access'
+                '--allow-file-access',
+                '--no-sandbox',
+                '--disable-setuid-sandbox'
             ],
             ignoreDefaultArgs: ['--mute-audio']
         });

@@ -1,12 +1,28 @@
 FROM node:lts-alpine as builder
 
+# Установка необходимых зависимостей
+RUN apk add --no-cache \
+    udev \
+    chromium \
+    nss \
+    freetype \
+    harfbuzz \
+    ca-certificates \
+    ttf-freefont \
+    tzdata
+
+# Установка временной зоны (замените на вашу)
+ENV TZ=Europe/Moscow
+
+ENV PUPPETEER_CACHE_DIR=/root/.cache/puppeteer
+
 WORKDIR /app
 
 COPY package*.json /
 
 COPY . .
 
-RUN npm install
+RUN npm install && npx puppeteer browsers install chrome
 
 RUN mkdir -p var/log
 
