@@ -16,6 +16,9 @@ jobs:
             - name: Install expect
               run: sudo apt-get install -y expect
 
+            - name: Start ssh-agent
+              run: eval $(ssh-agent -s)
+
             - name: Add private key with passphrase to ssh-agent
               run: |
                   expect << EOF
