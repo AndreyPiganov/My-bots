@@ -13,7 +13,7 @@ export default async function startZoomClass(link: string, numberClass: number):
 
         const browser = await puppeteer.launch({
             headless: true,
-            executablePath: '/usr/bin/chromium-browser',
+            executablePath: '/usr/bin/google-chrome-stable',
             args: [
                 '--use-fake-ui-for-media-stream', // Автоматически принимает запросы на доступ к микрофону/камере
                 '--use-fake-device-for-media-stream', // Использует фейковые устройства для тестирования
@@ -32,10 +32,11 @@ export default async function startZoomClass(link: string, numberClass: number):
         await context.overridePermissions('https://app.zoom.us', ['microphone', 'camera']);
 
         const page = await browser.newPage();
-
-        page.on('console', (msg) => {
-            logger.log('BROWSER LOG:', msg.text());
-        });
+        page.on('console', (msg) => console.log('PAGE LOG:', msg.text()));
+        page.on('response', (response) => console.log('Received response:', response.url()));
+        page.on('requestfailed', (request) =>
+            console.log('Request failed:', request.url(), request.failure().errorText)
+        );
 
         const page2 = await browser.newPage(); // Для скипа окна браузера зума.
 
@@ -51,7 +52,7 @@ export default async function startZoomClass(link: string, numberClass: number):
             deviceScaleFactor: 1
         });
 
-        await page.goto(link);
+        await page.goto(link, { waitUntil: 'networkidle2' });
         await page2.goto(link);
 
         await page2.close();
@@ -63,11 +64,11 @@ export default async function startZoomClass(link: string, numberClass: number):
         await page.waitForSelector('a[web_client]');
 
         const response = await Promise.all([
-            page.waitForNavigation(), // Ожидание редиректа
-            page.click('a[web_client]') // Клик по элементу
+            page.click('a[web_client]'), // Клик по элементу
+            page.waitForNavigation() // Ожидание редиректа
         ]);
 
-        await page.goto(response[0].url());
+        await page.goto(response[1].url());
 
         const iframeElement = await page.$('iframe');
 

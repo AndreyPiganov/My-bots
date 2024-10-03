@@ -13,16 +13,19 @@ export default async function startOdinOnline(): Promise<void> {
 
         const browser = await puppeteer.launch({
             headless: true,
-            executablePath: '/usr/bin/chromium-browser',
-            args: ['--allow-file-access', '--no-sandbox', '--disable-setuid-sandbox'],
+            executablePath: '/usr/bin/google-chrome-stable',
+            args: [
+                '--allow-file-access',
+                '--no-sandbox',
+                '--disable-setuid-sandbox',
+                '--disable-dev-shm-usage',
+                '--disable-accelerated-2d-canvas',
+                '--disable-gpu'
+            ],
             userDataDir: './session/odin'
         });
 
         const page = await browser.newPage();
-
-        page.on('console', (msg) => {
-            logger.log('BROWSER LOG:', msg.text());
-        });
 
         await page.setViewport({
             width: 1280,
