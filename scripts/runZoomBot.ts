@@ -13,7 +13,7 @@ export default async function startZoomClass(link: string, numberClass: number):
 
         const browser = await puppeteer.launch({
             headless: true,
-            // executablePath: '/usr/bin/chromium-browser',
+            executablePath: '/usr/bin/chromium-browser',
             args: [
                 '--use-fake-ui-for-media-stream', // Автоматически принимает запросы на доступ к микрофону/камере
                 '--use-fake-device-for-media-stream', // Использует фейковые устройства для тестирования
@@ -32,6 +32,10 @@ export default async function startZoomClass(link: string, numberClass: number):
         await context.overridePermissions('https://app.zoom.us', ['microphone', 'camera']);
 
         const page = await browser.newPage();
+
+        page.on('console', (msg) => {
+            logger.log('BROWSER LOG:', msg.text());
+        });
 
         const page2 = await browser.newPage(); // Для скипа окна браузера зума.
 
