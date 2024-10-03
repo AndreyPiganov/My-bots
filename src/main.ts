@@ -80,14 +80,6 @@ cron.schedule('15 16 * * 5', async () => {
     await runWithRetries(() => startZoomClass(friday.third, 3));
 });
 
-cron.schedule('14 18 * * 4', async () => {
-    // Тестовый schedule
-    await runWithRetries(startOdinOnline);
-    await runWithRetries(() =>
-        startZoomClass('https://us05web.zoom.us/j/89158102901?pwd=twd9YGEQapyQ6AUH6Qzosg5t49eOus.1', 3)
-    );
-});
-
 app.listen(PORT, () => {
     console.log(`Сервер работает на порту ${PORT}`);
 });
