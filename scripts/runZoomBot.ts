@@ -32,11 +32,20 @@ export default async function startZoomClass(link: string, numberClass: number):
         await context.overridePermissions('https://app.zoom.us', ['microphone', 'camera']);
 
         const page = await browser.newPage();
-        page.on('console', (msg) => console.log('PAGE LOG:', msg.text()));
-        page.on('response', (response) => console.log('Received response:', response.url()));
-        page.on('requestfailed', (request) =>
-            console.log('Request failed:', request.url(), request.failure().errorText)
+        // page.on('console', (msg) => console.log('PAGE LOG:', msg.text()));
+        // page.on('response', (response) => console.log('Received response:', response.url()));
+        // page.on('requestfailed', (request) =>
+        //     console.log('Request failed:', request.url(), request.failure().errorText)
+        // ); // Для отладки, увидеть логи браузере и тд...
+
+        await page.setUserAgent(
+            'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36'
         );
+
+        // Добавим необходимые заголовки (например, для Zoom)
+        await page.setExtraHTTPHeaders({
+            'Accept-Language': 'en-US,en;q=0.9'
+        });
 
         const page2 = await browser.newPage(); // Для скипа окна браузера зума.
 
