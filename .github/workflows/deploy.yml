@@ -13,21 +13,10 @@ jobs:
             - name: Checkout repository
               uses: actions/checkout@v2
 
-            - name: Install expect
-              run: sudo apt-get install -y expect
-
-            - name: Start ssh-agent
-              id: start_ssh_agent
-              run: eval $(ssh-agent -s)
-
-            - name: Add private key to agent (bypass stdin issue)
-              run: |
-                  echo "$SSH_PRIVATE_KEY" > /tmp/deploy_key
-                  chmod 600 /tmp/deploy_key
-                  ssh-add /tmp/deploy_key
-                  rm /tmp/deploy_key
-              env:
-                  SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+            - name: Setup SSH agent and add key
+              uses: webfactory/ssh-agent@v0.5.3
+              with:
+                  ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
 
             - name: Copy files to VM
               run: |
