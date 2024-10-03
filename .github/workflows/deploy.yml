@@ -17,18 +17,17 @@ jobs:
               run: sudo apt-get install -y expect
 
             - name: Start ssh-agent
+              id: start_ssh_agent
               run: eval $(ssh-agent -s)
 
-            - name: Add private key with passphrase to ssh-agent
+            - name: Add private key to agent (bypass stdin issue)
               run: |
-                  expect << EOF
-                  spawn ssh-add /dev/fd/0
-                  expect "Enter passphrase for /dev/fd/0:"
-                  send "$SSH_KEY_PASSPHRASE\r"
-                  expect eof
-                  EOF
+                  echo "$SSH_PRIVATE_KEY" > /tmp/deploy_key
+                  chmod 600 /tmp/deploy_key
+                  ssh-add /tmp/deploy_key
+                  rm /tmp/deploy_key
               env:
-                  SSH_KEY_PASSPHRASE: ${{ secrets.SSH_KEY_PASSPHRASE }}
+                  SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
 
             - name: Copy files to VM
               run: |
