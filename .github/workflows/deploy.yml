@@ -20,7 +20,7 @@ jobs:
 
             - name: Copy files to VM
               run: |
-                  scp -r -o StrictHostKeyChecking=no * ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:/Zoom-bot
+                  scp -r -o StrictHostKeyChecking=no * ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:~/Zoom-bot
 
             - name: Execute deployment commands on VM
               run: |
