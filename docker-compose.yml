@@ -18,6 +18,7 @@ services:
             - PORT=${PORT}
             - ODIN_EMAIL=${ODIN_EMAIL}
             - ODIN_PASSWORD=${ODIN_PASSWORD}
+            - LOG_LEVEL=${LOG_LEVEL}
             # - DEBUG=puppeteer:*
 networks:
     learn_bot_network:
