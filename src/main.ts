@@ -78,7 +78,12 @@ cron.schedule('30 14 * * 5', async () => {
 cron.schedule('15 16 * * 5', async () => {
     await runWithRetries(startOdinOnline);
     await runWithRetries(() => startZoomClass(friday.third, 3));
-}); //
+});
+
+cron.schedule('0 10 * * 6', async () => {
+    await runWithRetries(startOdinOnline);
+    await runWithRetries(() => startZoomClass(friday.third, 3));
+});
 
 app.listen(PORT, () => {
     console.log(`Сервер работает на порту ${PORT}`);
