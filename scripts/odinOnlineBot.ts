@@ -24,7 +24,7 @@ export default async function startOdinOnline(): Promise<void> {
             ],
             userDataDir: './session/odin',
             protocolTimeout: 0,
-            timeout: 0
+            timeout: 0 //
         });
 
         const page = await browser.newPage();
