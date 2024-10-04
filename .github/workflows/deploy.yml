@@ -22,10 +22,28 @@ jobs:
               run: |
                   scp -r -o StrictHostKeyChecking=no * ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }}:~/backend
 
+            - name: Check if Dockerfile_local was changed
+              id: dockerfile_changed
+              run: |
+                  if git diff --name-only HEAD^ HEAD | grep 'Dockerfile_local'; then
+                    echo "Dockerfile_local was changed"
+                    echo "build_required=true" >> $GITHUB_ENV
+                  else
+                    echo "Dockerfile_local was not changed"
+                    echo "build_required=false" >> $GITHUB_ENV
+                  fi
+            - name: build docker image
+              if: env.build_required == 'true'
+              run: |
+                  ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} << 'EOF'
+                    cd ~/backend
+                    docker compose build
+                  EOF
+
             - name: Execute deployment commands on VM
               run: |
                   ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} << 'EOF'
                     cd ~/backend
                     docker compose down
-                    docker compose up -d --build
+                    docker compose up -d
                   EOF
