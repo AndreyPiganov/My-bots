@@ -22,7 +22,9 @@ export default async function startOdinOnline(): Promise<void> {
                 '--disable-accelerated-2d-canvas',
                 '--disable-gpu'
             ],
-            userDataDir: './session/odin'
+            userDataDir: './session/odin',
+            protocolTimeout: 0,
+            timeout: 0
         });
 
         const page = await browser.newPage();

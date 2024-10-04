@@ -22,7 +22,9 @@ export default async function startZoomClass(link: string, numberClass: number):
                 '--no-sandbox',
                 '--disable-setuid-sandbox'
             ],
-            ignoreDefaultArgs: ['--mute-audio']
+            ignoreDefaultArgs: ['--mute-audio'],
+            protocolTimeout: 0,
+            timeout: 0
         });
 
         const context = browser.defaultBrowserContext();
