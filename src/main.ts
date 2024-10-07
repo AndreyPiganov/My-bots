@@ -30,6 +30,13 @@ cron.schedule('30 14 * * 1', async () => {
     await runWithRetries(() => startZoomClass(monday.four, 4));
 });
 
+cron.schedule('33 19 * * 1', async () => {
+    await runWithRetries(startOdinOnline);
+    await runWithRetries(
+        () => startZoomClass('https://us05web.zoom.us/j/83615017618?pwd=xoWjUbUA2laXt5nZryXa1Y0aOMPJt8.1', 1) // Тестовый
+    );
+});
+
 cron.schedule('0 9 * * 2', async () => {
     await runWithRetries(startOdinOnline);
     await runWithRetries(() => startZoomClass(tuesday.first, 1));
