@@ -114,18 +114,16 @@ export default async function startZoomClass(link: string, numberClass: number):
 
         logger.info('Бот вошел в конференцию');
 
-        await frame.waitForSelector('button[class="zm-btn zm-btn-legacy zm-btn--primary zm-btn__outline--blue"]', {
-            timeout: 0
-        });
-
-        await frame.click('button[class="zm-btn zm-btn-legacy zm-btn--primary zm-btn__outline--blue"]');
-
         const endDateWork = new Date();
         const endTime = formatTime(endDateWork);
+        const closeTime = 90 * 60 * 1000; // 90 минут в миллисекундах
+
+        setTimeout(async () => {
+            await browser.close();
+            logger.info('Браузер закрыт через полтора часа');
+        }, closeTime);
 
         logger.info(`Задача закончилась в ${dayOfWeek} ${endTime}`);
-
-        await browser.close();
     } catch (error) {
         logger.error('Произошла ошибка', error);
         throw error;
