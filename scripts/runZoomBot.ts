@@ -123,10 +123,11 @@ export default async function startZoomClass(link: string, numberClass: number):
                 await page.close();
                 await browser.close();
                 logger.info('Браузер закрыт через полтора часа');
+                logger.info(`Задача закончилась в ${dayOfWeek} ${endTime}`);
             }, closeTime);
         });
 
-        logger.info(`Задача закончилась в ${dayOfWeek} ${endTime}`);
+        return;
     } catch (error) {
         logger.error('Произошла ошибка', error);
         throw error;
