@@ -120,6 +120,7 @@ export default async function startZoomClass(link: string, numberClass: number):
 
         await new Promise(() => {
             setTimeout(async () => {
+                await page.close();
                 await browser.close();
                 logger.info('Браузер закрыт через полтора часа');
             }, closeTime);
