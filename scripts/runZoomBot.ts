@@ -17,7 +17,7 @@ export default async function startZoomClass(link: string, numberClass: number):
             args: [
                 '--use-fake-ui-for-media-stream', // Автоматически принимает запросы на доступ к микрофону/камере
                 '--use-fake-device-for-media-stream', // Использует фейковые устройства для тестирования
-                '--use-file-for-fake-audio-capture=./assets/micro.wav',
+                // '--use-file-for-fake-audio-capture=./assets/micro.wav',
                 '--allow-file-access',
                 '--no-sandbox',
                 '--disable-setuid-sandbox'
