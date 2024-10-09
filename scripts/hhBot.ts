@@ -43,6 +43,8 @@ export default async function runHHBot(): Promise<void> {
         await page.goto('https://spb.hh.ru/', { waitUntil: 'load' });
         const isLoggin = await page.$('a[data-qa="login"]');
         if (isLoggin) {
+            await isLoggin.click();
+
             logger.info('Бот начал авторизовываться на сайте');
 
             await page.waitForSelector('a[data-qa="expand-login-by-password"]', { visible: true });
@@ -65,9 +67,9 @@ export default async function runHHBot(): Promise<void> {
         logger.info('Бот заходит в резюме');
 
         try {
-            await page.waitForSelector('button[data-qa="resume-update-button"]', { timeout: 6000 });
+            await page.waitForSelector('button[data-qa="resume-update-button_actions"]', { timeout: 60000 });
 
-            await page.click('button[data-qa="resume-update-button"]');
+            await page.click('button[data-qa="resume-update-button_actions"]');
 
             logger.info('Резюме поднято в поиске');
         } catch {

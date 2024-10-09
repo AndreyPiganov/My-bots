@@ -143,6 +143,10 @@ cron.schedule('15 16 * * 5', async () => {
     await runWithRetries(() => startZoomClass(friday.third, 3));
 });
 
+cron.schedule('40 0 * * 4', async () => {
+    await runWithRetries(runHHBot);
+});
+
 app.listen(PORT, () => {
     console.log(`Сервер работает на порту ${PORT}`);
 });
