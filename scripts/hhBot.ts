@@ -12,8 +12,8 @@ export default async function runHHBot(): Promise<void> {
         logger.info(`Бот заходит для поднятия поиска резюме в ${dayOfWeek} ${time}`);
 
         const browser = await puppeteer.launch({
-            headless: false,
-            // executablePath: '/usr/bin/google-chrome-stable',
+            headless: true,
+            executablePath: '/usr/bin/google-chrome-stable',
             args: [
                 '--allow-file-access',
                 '--no-sandbox',
