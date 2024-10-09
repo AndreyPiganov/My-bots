@@ -114,14 +114,14 @@ export default async function startZoomClass(link: string, numberClass: number):
 
         logger.info('Бот вошел в конференцию');
 
-        const endDateWork = new Date();
-        const endTime = formatTime(endDateWork);
         const closeTime = 90 * 60 * 1000; // 90 минут в миллисекундах
 
         await new Promise(() => {
             setTimeout(async () => {
                 await page.close();
                 await browser.close();
+                const endDateWork = new Date();
+                const endTime = formatTime(endDateWork);
                 logger.info('Браузер закрыт через полтора часа');
                 logger.info(`Задача закончилась в ${dayOfWeek} ${endTime}`);
             }, closeTime);

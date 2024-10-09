@@ -19,7 +19,8 @@
         "start": "node dist/src/main.js",
         "start:build": "rm -rf dist && tsc && node dist/src/main.js",
         "start:zoom": "rm -rf dist && tsc && node dist/scripts/runZoomBot.js",
-        "start:odin": "rm -rf dist && tsc && node dist/scripts/odinOnlineBot.js"
+        "start:odin": "rm -rf dist && tsc && node dist/scripts/odinOnlineBot.js",
+        "start:hh": "rm -rf dist && tsc && node dist/scripts/hhBot.js"
     },
     "devDependencies": {
         "@types/express": "^5.0.0",
