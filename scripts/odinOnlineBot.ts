@@ -1,7 +1,7 @@
 import puppeteer from 'puppeteer';
 import formatTime from '../src/utils/formatTime';
 import config from '../src/config/configuration';
-import getCurrentDay from '../src/utils/getCurrentDay';
+import { getCurrentDay } from '../src/utils/getCurrentDay';
 import logger from '../src/utils/logger';
 
 export default async function startOdinOnline(): Promise<void> {
@@ -47,9 +47,9 @@ export default async function startOdinOnline(): Promise<void> {
         const isLoggin = await page.$('button[data-v-9915af7a]');
 
         if (isLoggin) {
-            await page.type('input[type="email"]', config.odin.email);
+            await page.type('input[type="email"]', config.services.odin.email);
 
-            await page.type('input[type="password"]', config.odin.password);
+            await page.type('input[type="password"]', config.services.odin.password);
 
             await isLoggin.click();
         }

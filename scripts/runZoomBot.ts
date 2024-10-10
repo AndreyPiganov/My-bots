@@ -1,6 +1,6 @@
 import puppeteer from 'puppeteer';
 import formatTime from '../src/utils/formatTime';
-import getCurrentDay from '../src/utils/getCurrentDay';
+import { getCurrentDay } from '../src/utils/getCurrentDay';
 import logger from '../src/utils/logger';
 
 export default async function startZoomClass(link: string, numberClass: number): Promise<void> {

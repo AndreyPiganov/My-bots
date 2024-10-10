@@ -1,6 +1,6 @@
 import puppeteer from 'puppeteer';
 import logger from '../src/utils/logger';
-import getCurrentDay from '../src/utils/getCurrentDay';
+import { getCurrentDay } from '../src/utils/getCurrentDay';
 import formatTime from '../src/utils/formatTime';
 import configuration from '../src/config/configuration';
 
@@ -55,8 +55,8 @@ export default async function runHHBot(): Promise<void> {
             await page.waitForSelector('input[data-qa="login-input-username"]', { visible: true });
             await page.waitForSelector('input[data-qa="login-input-password"]', { visible: true });
 
-            await page.type('input[data-qa="login-input-username"]', configuration.hh.email);
-            await page.type('input[data-qa="login-input-password"]', configuration.hh.password);
+            await page.type('input[data-qa="login-input-username"]', configuration.services.hh.email);
+            await page.type('input[data-qa="login-input-password"]', configuration.services.hh.password);
 
             await page.click('button[data-qa="account-login-submit"]');
         }

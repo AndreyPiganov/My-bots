@@ -1,10 +1,10 @@
 import { LoggerOptions, transports, format } from 'winston';
 import config from './configuration';
 
-const isProduction = config.nodeEnv === 'production';
+const isProduction = config.system.nodeEnv === 'production';
 
 export const winstonConfig: LoggerOptions = {
-    level: config.logLevel,
+    level: config.system.logLevel,
     format: format.combine(
         format.timestamp({
             format: 'DD-MM-YYYY HH:mm:ss'
