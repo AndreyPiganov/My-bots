@@ -22,7 +22,8 @@ export default async function runHHBot(): Promise<void> {
                 '--disable-accelerated-2d-canvas',
                 '--disable-gpu'
             ],
-            userDataDir: './session/hh'
+            userDataDir: './session/hh',
+            protocolTimeout: 0
         });
 
         const page = await browser.newPage();
@@ -74,10 +75,6 @@ export default async function runHHBot(): Promise<void> {
             logger.info('Резюме поднято в поиске');
         } catch {
             logger.warn('Резюме уже поднято в поиске');
-            await page.close();
-            await browser.close();
-
-            return;
         }
 
         await page.close();

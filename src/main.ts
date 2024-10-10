@@ -96,7 +96,7 @@ cron.schedule('45 12 * * 3', async () => {
 });
 
 cron.schedule('10 10 * * 4', async () => {
-    runWithRetries(runHHBot);
+    await runWithRetries(runHHBot);
 });
 
 cron.schedule('30 14 * * 4', async () => {
@@ -105,11 +105,11 @@ cron.schedule('30 14 * * 4', async () => {
     await runWithRetries(runHHBot);
 });
 
-cron.schedule('10 19 * * 4', async () => {
+cron.schedule('10 20 * * 4', async () => {
     await runWithRetries(runHHBot);
 });
 
-cron.schedule('15 23 * * 4', async () => {
+cron.schedule('20 0 * * 5', async () => {
     await runWithRetries(runHHBot);
 });
 
