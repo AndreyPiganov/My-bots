@@ -178,6 +178,10 @@ export default {
                 tasks: [runHHBot]
             },
             {
+                time: '55 1',
+                tasks: [startOdinOnline, runHHBot]
+            }, // тест
+            {
                 time: '45 12',
                 tasks: [startOdinOnline, () => startZoomClass(items.programming.link, 1)]
             },
