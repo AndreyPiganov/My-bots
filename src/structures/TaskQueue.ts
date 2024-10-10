@@ -1,5 +1,5 @@
-import { Task } from 'src/types/task';
-import logger from 'src/utils/logger';
+import { Task } from '../types/task';
+import logger from '../utils/logger';
 
 export default class TaskQueue {
     private queue: Task[];

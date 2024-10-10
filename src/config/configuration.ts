@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
-import runHHBot from 'scripts/hhBot';
-import startOdinOnline from 'scripts/odinOnlineBot';
-import startZoomClass from 'scripts/runZoomBot';
+import runHHBot from '../../scripts/hhBot';
+import startOdinOnline from '../../scripts/odinOnlineBot';
+import startZoomClass from '../../scripts/runZoomBot';
 
 dotenv.config();
 
@@ -178,7 +178,7 @@ export default {
                 tasks: [runHHBot]
             },
             {
-                time: '55 1',
+                time: '58 1',
                 tasks: [startOdinOnline, runHHBot]
             }, // тест
             {

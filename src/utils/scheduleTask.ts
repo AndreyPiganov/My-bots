@@ -1,6 +1,6 @@
 import cron from 'node-cron';
 import runWithRetries from './runWithRetries';
-import TaskQueue from 'src/structures/TaskQueue';
+import TaskQueue from '../structures/TaskQueue';
 
 export const scheduleTask = (time: string, tasks: Function[], taskQueue: TaskQueue) => {
     cron.schedule(time, async () => {
