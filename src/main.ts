@@ -141,7 +141,7 @@ cron.schedule('30 14 * * 5', async () => {
     await runWithRetries(() => startZoomClass(friday.second, 2));
 });
 
-cron.schedule('15 16 * * 5', async () => {
+cron.schedule('58 16 * * 5', async () => {
     await runWithRetries(startOdinOnline);
     await runWithRetries(() => startZoomClass(friday.third, 3));
 });
