@@ -102,10 +102,13 @@ cron.schedule('10 10 * * 4', async () => {
 cron.schedule('30 14 * * 4', async () => {
     await runWithRetries(startOdinOnline);
     await runWithRetries(() => startZoomClass(thursday.first, 1));
+});
+
+cron.schedule('20 14 * * 4', async () => {
     await runWithRetries(runHHBot);
 });
 
-cron.schedule('10 20 * * 4', async () => {
+cron.schedule('45 18 * * 4', async () => {
     await runWithRetries(runHHBot);
 });
 
@@ -144,6 +147,10 @@ cron.schedule('15 16 * * 5', async () => {
 });
 
 cron.schedule('40 0 * * 4', async () => {
+    await runWithRetries(runHHBot);
+});
+
+cron.schedule('33 16 * * 4', async () => {
     await runWithRetries(runHHBot);
 });
 
