@@ -19,6 +19,9 @@ cron.schedule('0 9 * * 1', async () => {
 cron.schedule('45 10 * * 1', async () => {
     await runWithRetries(startOdinOnline);
     await startZoomClass(monday.second, 2);
+});
+
+cron.schedule('10 10 * * 1', async () => {
     await runWithRetries(runHHBot);
 });
 
@@ -49,10 +52,13 @@ cron.schedule('0 9 * * 2', async () => {
     await runWithRetries(() => startZoomClass(tuesday.first, 1));
 });
 
+cron.schedule('10 10 * * 2', async () => {
+    await runWithRetries(runHHBot);
+});
+
 cron.schedule('45 10 * * 2', async () => {
     await runWithRetries(startOdinOnline);
     await runWithRetries(() => startZoomClass(tuesday.second, 2));
-    await runWithRetries(runHHBot);
 });
 
 cron.schedule('50 14 * * 2', async () => {
@@ -75,6 +81,9 @@ cron.schedule('0 9 * * 3', async () => {
 cron.schedule('45 10 * * 3', async () => {
     await runWithRetries(startOdinOnline);
     await runWithRetries(() => startZoomClass(wednesday.second, 2));
+});
+
+cron.schedule('10 10 * * 3', async () => {
     await runWithRetries(runHHBot);
 });
 
@@ -121,18 +130,28 @@ cron.schedule('15 16 * * 4', async () => {
     await runWithRetries(() => startZoomClass(thursday.second, 2));
 });
 
+cron.schedule('40 0 * * 4', async () => {
+    await runWithRetries(runHHBot);
+});
+
+cron.schedule('10 10 * * 5', async () => {
+    await runWithRetries(runHHBot);
+});
+
 cron.schedule('45 12 * * 5', async () => {
     await runWithRetries(startOdinOnline);
     await runWithRetries(() => startZoomClass(friday.first, 1));
+});
+
+cron.schedule('20 14 * * 5', async () => {
     await runWithRetries(runHHBot);
 });
 
-cron.schedule('0 17 * * 5', async () => {
-    //
+cron.schedule('40 18 * * 5', async () => {
     await runWithRetries(runHHBot);
 });
 
-cron.schedule('16 21 * * 5', async () => {
+cron.schedule('0 23 * * 5', async () => {
     await runWithRetries(runHHBot);
 });
 
@@ -141,17 +160,9 @@ cron.schedule('30 14 * * 5', async () => {
     await runWithRetries(() => startZoomClass(friday.second, 2));
 });
 
-cron.schedule('58 16 * * 5', async () => {
+cron.schedule('15 16 * * 5', async () => {
     await runWithRetries(startOdinOnline);
     await runWithRetries(() => startZoomClass(friday.third, 3));
-});
-
-cron.schedule('40 0 * * 4', async () => {
-    await runWithRetries(runHHBot);
-});
-
-cron.schedule('25 17 * * 4', async () => {
-    await runWithRetries(runHHBot);
 });
 
 app.listen(PORT, () => {
