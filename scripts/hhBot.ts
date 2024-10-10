@@ -61,9 +61,9 @@ export default async function runHHBot(): Promise<void> {
             await page.click('button[data-qa="account-login-submit"]');
         }
 
-        await page.waitForSelector('a[data-qa=link]');
+        await page.waitForSelector('a[data-qa=mainmenu_myResumes]');
 
-        await page.click('a[data-qa=link]');
+        await page.click('a[data-qa=mainmenu_myResumes]');
 
         logger.info('Бот заходит в резюме');
 

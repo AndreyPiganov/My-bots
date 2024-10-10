@@ -150,7 +150,7 @@ cron.schedule('40 0 * * 4', async () => {
     await runWithRetries(runHHBot);
 });
 
-cron.schedule('50 16 * * 4', async () => {
+cron.schedule('25 17 * * 4', async () => {
     await runWithRetries(runHHBot);
 });
 
