@@ -17,6 +17,7 @@ cron.schedule('0 9 * * 1', async () => {
 });
 
 cron.schedule('45 10 * * 1', async () => {
+    //
     await runWithRetries(startOdinOnline);
     await startZoomClass(monday.second, 2);
 });
