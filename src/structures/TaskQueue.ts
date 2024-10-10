@@ -1,4 +1,5 @@
 import { Task } from 'src/types/task';
+import logger from 'src/utils/logger';
 
 export default class TaskQueue {
     private queue: Task[];
@@ -9,13 +10,11 @@ export default class TaskQueue {
         this.isProcessing = false;
     }
 
-    // Добавляем задачу в очередь
     add(task: Task) {
         this.queue.push(task);
         this.processQueue();
     }
 
-    // Обрабатываем очередь
     async processQueue() {
         if (this.isProcessing) return;
         this.isProcessing = true;
@@ -24,8 +23,9 @@ export default class TaskQueue {
             const currentTask = this.queue.shift();
             try {
                 await currentTask();
+                logger.info('Задача начала обрабатываться');
             } catch (error) {
-                console.error('Ошибка выполнения задачи:', error);
+                logger.error('Ошибка выполнения задачи:', error);
             }
         }
 
