@@ -1,19 +1,35 @@
-import express from 'express';
-import config from './config/configuration';
-import { scheduleTask } from './utils/scheduleTask';
-import { getCurrentDayIndex } from './utils/getCurrentDay';
-import TaskQueue from './structures/TaskQueue';
+import { NestFactory } from '@nestjs/core';
+// import config from './config/configuration';
+// import { scheduleTask } from './utils/scheduleTask';
+// import { getCurrentDayIndex } from './utils/getCurrentDay';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
+import * as bodyParser from 'body-parser';
+import { ValidationPipe } from '@nestjs/common';
+import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
+import { AppModule } from './modules/app/app.module';
+import { ConfigService } from '@nestjs/config';
 
-const scheduleConfig = config.schedule;
+// const scheduleConfig = config.schedule;
 
-const app = express();
-const PORT = process.env.PORT || 5000;
-const taskQueue = new TaskQueue();
+// for (const [day, tasks] of Object.entries(scheduleConfig)) {
+//     tasks.forEach((task) => scheduleTask(`${task.time} * * ${getCurrentDayIndex(day)}`, task.tasks));
+// }
 
-for (const [day, tasks] of Object.entries(scheduleConfig)) {
-    tasks.forEach((task) => scheduleTask(`${task.time} * * ${getCurrentDayIndex(day)}`, task.tasks, taskQueue));
+async function bootstrap() {
+    const app = await NestFactory.create(AppModule);
+    const configService = app.get(ConfigService);
+    const PORT = configService.get<string>('port') || 5000;
+    const configSwagger = new DocumentBuilder()
+        .setTitle('Bots API')
+        .setDescription('API к ботам для удобного взаимодействия')
+        .setVersion('1.0')
+        .addTag('api')
+        .build();
+    const document = SwaggerModule.createDocument(app, configSwagger);
+    app.useGlobalPipes(new ValidationPipe({ transform: true, whitelist: true }));
+    app.useLogger(app.get(WINSTON_MODULE_NEST_PROVIDER));
+    app.use(bodyParser.json({ limit: '10mb' }));
+    SwaggerModule.setup('api', app, document);
+    await app.listen(PORT);
 }
-
-app.listen(PORT, () => {
-    console.log(`Сервер работает на порту ${PORT}`);
-});
+bootstrap();

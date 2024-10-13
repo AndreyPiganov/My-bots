@@ -3,13 +3,13 @@ import formatTime from '../src/utils/formatTime';
 import { getCurrentDay } from '../src/utils/getCurrentDay';
 import logger from '../src/utils/logger';
 
-export default async function startZoomClass(link: string, numberClass: number): Promise<void> {
+export default async function startZoomClass(link: string, className: string): Promise<void> {
     try {
         const now = new Date();
         const dayOfWeek = getCurrentDay();
         const time = formatTime(now);
 
-        logger.info(`Выполняется задача в ${dayOfWeek} ${time} - ${numberClass} пара`);
+        logger.info(`Выполняется задача в ${dayOfWeek} ${time} - ${className}`);
 
         const browser = await puppeteer.launch({
             headless: true,

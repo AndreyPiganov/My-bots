@@ -1,10 +1,12 @@
 import { LoggerOptions, transports, format } from 'winston';
-import config from './configuration';
+import { ConfigService } from '@nestjs/config';
 
-const isProduction = config.system.nodeEnv === 'production';
+const configService = new ConfigService();
+
+const isProduction = configService.get<string>('evironment') === 'production';
 
 export const winstonConfig: LoggerOptions = {
-    level: config.system.logLevel,
+    level: configService.get<string>('logLevel'),
     format: format.combine(
         format.timestamp({
             format: 'DD-MM-YYYY HH:mm:ss'
