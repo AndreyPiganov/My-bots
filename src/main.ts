@@ -1,19 +1,10 @@
 import { NestFactory } from '@nestjs/core';
-// import config from './config/configuration';
-// import { scheduleTask } from './utils/scheduleTask';
-// import { getCurrentDayIndex } from './utils/getCurrentDay';
 import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import * as bodyParser from 'body-parser';
 import { ValidationPipe } from '@nestjs/common';
 import { WINSTON_MODULE_NEST_PROVIDER } from 'nest-winston';
 import { AppModule } from './modules/app/app.module';
 import { ConfigService } from '@nestjs/config';
-
-// const scheduleConfig = config.schedule;
-
-// for (const [day, tasks] of Object.entries(scheduleConfig)) {
-//     tasks.forEach((task) => scheduleTask(`${task.time} * * ${getCurrentDayIndex(day)}`, task.tasks));
-// }
 
 async function bootstrap() {
     const app = await NestFactory.create(AppModule);
