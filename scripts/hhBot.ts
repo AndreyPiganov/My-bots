@@ -91,7 +91,7 @@ export default async function runHHBot(): Promise<void> {
         return;
     } catch (error) {
         logger.error('Произошла ошибка', error);
-        const sessionDirRm = path.resolve(__dirname, 'session/hh');
+        const sessionDirRm = path.resolve('~', 'session/hh');
         if (fs.existsSync(sessionDirRm)) {
             logger.info(`Удаление папки: ${sessionDirRm}`);
             fs.rm(sessionDirRm, { recursive: true, force: true }, (err) => {
