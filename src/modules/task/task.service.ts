@@ -10,6 +10,7 @@ import runHHBot from 'scripts/hhBot';
 import startOdinOnline from 'scripts/odinOnlineBot';
 import startZoomClass from 'scripts/runZoomBot';
 import { TaskWithSubject } from './dto/taskWithSubject';
+import runWithRetries from '../../../dist/src/utils/runWithRetries';
 
 @Injectable()
 export class TaskService implements OnModuleInit {
@@ -185,7 +186,7 @@ export class TaskService implements OnModuleInit {
                 switch (type) {
                     case 'HH':
                         this.logger.log(`Запуск скрипта для HH бота для задачи ${task.id}`);
-                        await runHHBot();
+                        await runWithRetries(runHHBot);
                         break;
 
                     case 'ODIN':
