@@ -48,7 +48,7 @@ export default async function runHHBot(): Promise<void> {
             deviceScaleFactor: 1 // Масштабирование. 1 = 100%, 2 = 200%, и т.д.
         });
         logger.info('Заходит на сайт');
-        await page.goto('https://spb.hh.ru/', { waitUntil: 'load', timeout: 60000 });
+        await page.goto('https://spb.hh.ru/', { waitUntil: 'networkidle2', timeout: 60000 });
         logger.info('Открыл сайт');
         const isLoggin = await page.$('a[data-qa="login"]');
         if (isLoggin) {
@@ -69,9 +69,12 @@ export default async function runHHBot(): Promise<void> {
             await page.click('button[data-qa="account-login-submit"]');
         }
 
-        await page.waitForSelector('a[data-qa=mainmenu_myResumes]', { timeout: 60000 });
+        const loggedIn = await page.$('a[data-qa="mainmenu_myResumes"]');
+        if (!loggedIn) {
+            throw new Error('Не удалось войти в аккаунт.');
+        }
 
-        await page.click('a[data-qa=mainmenu_myResumes]');
+        await loggedIn.click();
 
         logger.info('Бот заходит в резюме');
 
