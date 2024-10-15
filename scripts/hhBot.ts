@@ -3,8 +3,6 @@ import logger from '../src/utils/logger';
 import { getCurrentDay } from '../src/utils/getCurrentDay';
 import formatTime from '../src/utils/formatTime';
 import { ConfigService } from '@nestjs/config';
-import fs from 'fs';
-import path from 'path';
 
 export default async function runHHBot(): Promise<void> {
     const userDataDir = './session/hh';
