@@ -3,6 +3,8 @@ import logger from '../src/utils/logger';
 import { getCurrentDay } from '../src/utils/getCurrentDay';
 import formatTime from '../src/utils/formatTime';
 import { ConfigService } from '@nestjs/config';
+import fs from 'fs';
+import path from 'path';
 
 export default async function runHHBot(): Promise<void> {
     const userDataDir = './session/hh';
@@ -22,11 +24,11 @@ export default async function runHHBot(): Promise<void> {
                 '--disable-setuid-sandbox',
                 '--disable-dev-shm-usage',
                 '--disable-accelerated-2d-canvas',
-                '--disable-gpu',
-                '--disable-process-singleton'
+                '--disable-gpu'
             ],
             userDataDir,
-            protocolTimeout: 0
+            protocolTimeout: 0,
+            timeout: 60000
         });
 
         const page = await browser.newPage();
@@ -93,6 +95,19 @@ export default async function runHHBot(): Promise<void> {
         return;
     } catch (error) {
         logger.error('Произошла ошибка', error);
+        const sessionDirRm = path.resolve('session/hh');
+        if (fs.existsSync(sessionDirRm)) {
+            logger.info(`Удаление папки: ${sessionDirRm}`);
+            fs.rm(sessionDirRm, { recursive: true, force: true }, (err) => {
+                if (err) {
+                    logger.error(`Ошибка при удалении папки: ${err.message}`);
+                } else {
+                    logger.info(`Папка ${sessionDirRm} успешно удалена.`);
+                }
+            });
+        } else {
+            logger.info(`Папка ${sessionDirRm} не существует.`);
+        }
         throw error;
     }
 }
