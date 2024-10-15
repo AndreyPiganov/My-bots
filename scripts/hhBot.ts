@@ -34,6 +34,7 @@ export default async function runHHBot(): Promise<void> {
 
         const page = await browser.newPage();
 
+        logger.info('Открыл браузер');
         await page.setUserAgent(
             'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/93.0.4577.63 Safari/537.36'
         );
@@ -47,7 +48,9 @@ export default async function runHHBot(): Promise<void> {
             height: 720,
             deviceScaleFactor: 1 // Масштабирование. 1 = 100%, 2 = 200%, и т.д.
         });
+        logger.info('Заходит на сайт');
         await page.goto('https://spb.hh.ru/', { waitUntil: 'load', timeout: 60000 });
+        logger.info('Открыл сайт');
         const isLoggin = await page.$('a[data-qa="login"]');
         if (isLoggin) {
             await isLoggin.click();
