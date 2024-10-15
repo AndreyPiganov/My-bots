@@ -24,10 +24,12 @@ export default async function runHHBot(): Promise<void> {
                 '--disable-setuid-sandbox',
                 '--disable-dev-shm-usage',
                 '--disable-accelerated-2d-canvas',
-                '--disable-gpu'
+                '--disable-gpu',
+                '--disable-process-singleton'
             ],
             userDataDir,
-            protocolTimeout: 0
+            protocolTimeout: 0,
+            timeout: 60000
         });
 
         const page = await browser.newPage();
@@ -45,7 +47,7 @@ export default async function runHHBot(): Promise<void> {
             height: 720,
             deviceScaleFactor: 1 // Масштабирование. 1 = 100%, 2 = 200%, и т.д.
         });
-        await page.goto('https://spb.hh.ru/', { waitUntil: 'load' });
+        await page.goto('https://spb.hh.ru/', { waitUntil: 'load', timeout: 60000 });
         const isLoggin = await page.$('a[data-qa="login"]');
         if (isLoggin) {
             await isLoggin.click();
