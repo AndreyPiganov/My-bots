@@ -68,7 +68,7 @@ export default async function runHHBot(): Promise<void> {
             await page.click('button[data-qa="account-login-submit"]');
         }
 
-        await page.waitForSelector('a[data-qa=mainmenu_myResumes]');
+        await page.waitForSelector('a[data-qa=mainmenu_myResumes]', { timeout: 60000 });
 
         await page.click('a[data-qa=mainmenu_myResumes]');
 
@@ -94,19 +94,6 @@ export default async function runHHBot(): Promise<void> {
         return;
     } catch (error) {
         logger.error('Произошла ошибка', error);
-        const sessionDirRm = path.resolve('session/hh');
-        if (fs.existsSync(sessionDirRm)) {
-            logger.info(`Удаление папки: ${sessionDirRm}`);
-            fs.rm(sessionDirRm, { recursive: true, force: true }, (err) => {
-                if (err) {
-                    logger.error(`Ошибка при удалении папки: ${err.message}`);
-                } else {
-                    logger.info(`Папка ${sessionDirRm} успешно удалена.`);
-                }
-            });
-        } else {
-            logger.info(`Папка ${sessionDirRm} не существует.`);
-        }
         throw error;
     }
 }
