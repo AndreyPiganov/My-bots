@@ -35,17 +35,18 @@ jobs:
                     echo "Dockerfile_local was not changed"
                     echo "build_required=false" >> $GITHUB_ENV
                   fi
-            - name: build docker image
+
+            - name: Build docker image using password
               if: env.build_required == 'true'
               run: |
-                  ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} << 'EOF'
+                  sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} << 'EOF'
                     cd ~/backend
                     docker compose build
                   EOF
 
-            - name: Execute deployment commands on VM
+            - name: Execute deployment commands on VM using password
               run: |
-                  ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} << 'EOF'
+                  sshpass -p "${{ secrets.SSH_PASSWORD }}" ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USERNAME }}@${{ secrets.SSH_HOST }} << 'EOF'
                     cd ~/backend
                     docker compose down
                     docker compose up -d
