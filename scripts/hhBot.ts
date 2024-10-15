@@ -17,7 +17,7 @@ export default async function runHHBot(): Promise<void> {
 
         const browser = await puppeteer.launch({
             headless: true,
-            executablePath: '/usr/bin/google-chrome-stable',
+            executablePath: '/usr/bin/chromium', // Поменяй
             args: [
                 '--allow-file-access',
                 '--no-sandbox',
