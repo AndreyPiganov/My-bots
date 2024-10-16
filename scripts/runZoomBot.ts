@@ -69,6 +69,8 @@ export default async function startZoomClass(link: string, className: string): P
 
         await page2.close();
 
+        await page.screenshot({ path: 'screenshot.png' });
+
         await page.waitForSelector('a[download]', { timeout: 60000 });
 
         await page.click('a[download]');
