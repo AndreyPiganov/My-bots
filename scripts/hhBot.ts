@@ -69,6 +69,8 @@ export default async function runHHBot(): Promise<void> {
             await page.click('button[data-qa="account-login-submit"]');
         }
 
+        await page.screenshot({ path: 'screenshot.png' }); // Тестовый
+
         await page.waitForSelector('a[data-qa="mainmenu_myResumes"');
 
         await page.click('a[data-qa="mainmenu_myResumes"]');
