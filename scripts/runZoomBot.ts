@@ -55,7 +55,7 @@ export default async function startZoomClass(link: string, className: string): P
         await page.setViewport({
             width: 1280,
             height: 720,
-            deviceScaleFactor: null // Масштабирование. 1 = 100%, 2 = 200%, и т.д.
+            deviceScaleFactor: 1 // Масштабирование. 1 = 100%, 2 = 200%, и т.д.
         });
 
         await page2.setViewport({
@@ -69,7 +69,7 @@ export default async function startZoomClass(link: string, className: string): P
 
         await page2.close();
 
-        await page.screenshot({ path: 'screenshot.png' });
+        await page.screenshot({ path: 'screenshot.png' }); // Поменять если надо
 
         await page.waitForSelector('a[download]', { timeout: 60000 });
 
