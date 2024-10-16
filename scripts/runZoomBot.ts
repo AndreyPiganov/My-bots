@@ -73,6 +73,10 @@ export default async function startZoomClass(link: string, className: string): P
 
         await page.screenshot({ path: 'screenshot.png' }); // Поменять если надо
 
+        await page.waitForSelector('button[id="onetrust-accept-btn-handler"]');
+
+        await page.click('button[id="onetrust-accept-btn-handler"]');
+
         await page.waitForSelector('a[download]', { timeout: 60000 });
 
         await page.click('a[download]');
