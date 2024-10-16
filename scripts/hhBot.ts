@@ -17,7 +17,7 @@ export default async function runHHBot(): Promise<void> {
 
         const browser = await puppeteer.launch({
             headless: true,
-            executablePath: '/usr/bin/chromium', // Поменяй
+            executablePath: '/usr/bin/google-chrome-stable', // Поменяй
             args: [
                 '--allow-file-access',
                 '--no-sandbox',
@@ -69,12 +69,15 @@ export default async function runHHBot(): Promise<void> {
             await page.click('button[data-qa="account-login-submit"]');
         }
 
-        const loggedIn = await page.$('a[data-qa="mainmenu_myResumes"]');
-        if (!loggedIn) {
-            throw new Error('Не удалось войти в аккаунт.');
-        }
+        await page.waitForSelector('a[data-qa="mainmenu_myResumes"');
 
-        await loggedIn.click();
+        await page.click('a[data-qa="mainmenu_myResumes"]');
+        // const loggedIn = await page.$('a[data-qa="mainmenu_myResumes"]');
+        // if (!loggedIn) {
+        //     throw new Error('Не удалось войти в аккаунт.');
+        // }
+
+        // await loggedIn.click();
 
         logger.info('Бот заходит в резюме');
 
