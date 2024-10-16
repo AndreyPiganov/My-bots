@@ -64,6 +64,9 @@ export default async function runHHBot(): Promise<void> {
             await page.waitForSelector('input[data-qa="login-input-password"]', { visible: true });
 
             await page.type('input[data-qa="login-input-username"]', configService.get('HH_EMAIL'));
+
+            console.log(configService.get('HH_EMAIL'));
+            await page.screenshot({ path: 'test.png' });
             await page.type('input[data-qa="login-input-password"]', configService.get('HH_PASSWORD'));
 
             await page.click('button[data-qa="account-login-submit"]');
