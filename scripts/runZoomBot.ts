@@ -88,6 +88,8 @@ export default async function startZoomClass(link: string, className: string): P
 
         const frame = await iframeElement.contentFrame();
 
+        await page.screenshot({ path: 'test.png' });
+
         await frame.waitForSelector('input[type="text"]', { visible: true });
 
         await frame.type('input[type="text"]', 'Пиганов Андрей 3102д');
