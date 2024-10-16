@@ -2,6 +2,7 @@ import puppeteer from 'puppeteer';
 import formatTime from '../src/utils/formatTime';
 import { getCurrentDay } from '../src/utils/getCurrentDay';
 import logger from '../src/utils/logger';
+import exclusiveScript from './exclusiveScript';
 
 export default async function startZoomClass(link: string, className: string): Promise<void> {
     try {
@@ -54,7 +55,7 @@ export default async function startZoomClass(link: string, className: string): P
         await page.setViewport({
             width: 1280,
             height: 720,
-            deviceScaleFactor: 1 // Масштабирование. 1 = 100%, 2 = 200%, и т.д.
+            deviceScaleFactor: null // Масштабирование. 1 = 100%, 2 = 200%, и т.д.
         });
 
         await page2.setViewport({
@@ -102,8 +103,16 @@ export default async function startZoomClass(link: string, className: string): P
             logger.info('Отлично подключили звук для конференции');
         } catch {
             await frame.waitForSelector(
-                'button[class="zm-btn join-audio-by-voip__join-btn zm-btn--primary zm-btn__outline--white zm-btn--lg"]'
+                'button[class="zm-btn join-audio-by-voip__join-btn zm-btn--primary zm-btn__outline--white zm-btn--lg"]',
+                { visible: true, timeout: 0 }
             );
+
+            await new Promise<void>((resolve) => {
+                setTimeout(() => {
+                    logger.info('Ожидаем прогрузку кнопки');
+                    resolve();
+                }, 10000);
+            });
 
             await frame.click(
                 'button[class="zm-btn join-audio-by-voip__join-btn zm-btn--primary zm-btn__outline--white zm-btn--lg"]'
@@ -113,6 +122,10 @@ export default async function startZoomClass(link: string, className: string): P
         }
 
         logger.info('Бот вошел в конференцию');
+
+        if (className === 'Тестовый блок') {
+            await exclusiveScript(frame);
+        }
 
         const closeTime = 90 * 60 * 1000; // 90 минут в миллисекундах
 
