@@ -90,6 +90,10 @@ export default async function startZoomClass(link: string, className: string): P
 
         await page.goto(response[1].url());
 
+        await page.waitForSelector('button[id="wc_agree1"]', { visible: true });
+
+        await page.click('button[id="wc_agree1"]');
+
         const iframeElement = await page.$('iframe');
 
         const frame = await iframeElement.contentFrame();
