@@ -7,7 +7,7 @@ export default async function exclusiveScript(frame: Frame, page: Page) {
     try {
         await delay(10000);
 
-        await page.screenshot({ path: 'exclusive.png' });
+        await page.screenshot({ path: 'screens/exclusive.png' });
 
         await frame.waitForSelector('div[class="footer-chat-button"]', { timeout: 0 });
 
@@ -64,7 +64,7 @@ export default async function exclusiveScript(frame: Frame, page: Page) {
         if (viewLastMessage) {
             await page.screenshot({ path: 'screens/lastMessage.png' });
             await viewLastMessage.click();
-            await delay(6000);
+            await delay(10000);
             await page.screenshot({ path: 'screens/lastMessageClear.png' });
         }
 
