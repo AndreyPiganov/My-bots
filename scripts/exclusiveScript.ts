@@ -5,9 +5,9 @@ import delay from 'src/utils/delay';
 
 export default async function exclusiveScript(frame: Frame, page: Page) {
     try {
-        await frame.waitForSelector('div[class="footer-chat-button"]');
+        await frame.waitForSelector('div[class="footer-chat-button"]', { timeout: 0 });
 
-        await frame.waitForSelector('div[id="chat"]');
+        await frame.waitForSelector('div[id="chat"]', { timeout: 0 });
 
         await frame.click('div[class="footer-chat-button"]');
 
