@@ -83,6 +83,10 @@ export default async function startZoomClass(link: string, className: string): P
 
         await page.waitForSelector('a[web_client]');
 
+        await delay(15000);
+
+        await page.screenshot({ path: 'webClient.png' });
+
         const response = await Promise.all([
             page.click('a[web_client]'), // Клик по элементу
             page.waitForNavigation() // Ожидание редиректа
