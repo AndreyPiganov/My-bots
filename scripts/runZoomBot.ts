@@ -121,6 +121,8 @@ export default async function startZoomClass(link: string, className: string): P
             await frame.click('div[class="preview-video__control-button-container"]');
 
             logger.warn('Отлично подключили звук для конференции, она еще не началась');
+
+            await page.screenshot({ path: 'btn.png' });
         } catch {
             await frame.waitForSelector(
                 'button[class="zm-btn join-audio-by-voip__join-btn zm-btn--primary zm-btn__outline--white zm-btn--lg"]',
