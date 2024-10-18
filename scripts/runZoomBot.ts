@@ -26,7 +26,9 @@ export default async function startZoomClass(link: string, className: string): P
                 // '--accept-cookies', // Пробуем автоматически принимать cookies
                 // '--disable-features=SameSiteByDefaultCookies' // Отключение обработки SameSite
             ],
-            ignoreDefaultArgs: ['--mute-audio']
+            ignoreDefaultArgs: ['--mute-audio'],
+            protocolTimeout: 0,
+            timeout: 0
         });
 
         const context = browser.defaultBrowserContext();
@@ -110,13 +112,13 @@ export default async function startZoomClass(link: string, className: string): P
 
         await frame.click('button[type=button]');
         try {
-            await frame.waitForSelector('div[class="preview-video__control-button-container simple"]', {
+            await frame.waitForSelector('div[class="preview-video__control-button-container"]', {
                 timeout: 5000
             });
 
-            await frame.click('div[class="preview-video__control-button-container simple"]');
+            await frame.click('div[class="preview-video__control-button-container"]');
 
-            await frame.click('div[class="preview-video__control-button-container simple"]');
+            await frame.click('div[class="preview-video__control-button-container"]');
 
             logger.warn('Отлично подключили звук для конференции, она еще не началась');
         } catch {
