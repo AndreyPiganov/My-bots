@@ -22,6 +22,8 @@ services:
             - HH_EMAIL=${HH_EMAIL}
             - HH_PASSWORD=${HH_PASSWORD}
             - DATABASE_URL=postgresql://root:root@bots_db:5432/schedule?schema=public
+            - API_PROXY_KEY=${API_PROXY_KEY}
+            - API_KEY=${API_KEY}
             # - DEBUG=puppeteer:*
     postgres:
         image: postgres:16-alpine
