@@ -26,9 +26,7 @@ export default async function startZoomClass(link: string, className: string): P
                 '--accept-cookies', // Пробуем автоматически принимать cookies
                 '--disable-features=SameSiteByDefaultCookies' // Отключение обработки SameSite
             ],
-            ignoreDefaultArgs: ['--mute-audio'],
-            protocolTimeout: 0,
-            timeout: 0
+            ignoreDefaultArgs: ['--mute-audio']
         });
 
         const context = browser.defaultBrowserContext();
