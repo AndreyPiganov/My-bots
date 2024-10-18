@@ -67,6 +67,8 @@ export default async function startZoomClass(link: string, className: string): P
 
         await page2.close();
 
+        await page.screenshot({ path: 'page.png' });
+
         // const testIFrame = await page.$('iframe'); // Для стран ЕС
 
         // const testFrame = await testIFrame.contentFrame(); // для стран ЕС
@@ -79,6 +81,8 @@ export default async function startZoomClass(link: string, className: string): P
 
         await page.click('a[download]');
 
+        await page.screenshot({ path: 'test.png' });
+
         await page.waitForSelector('a[web_client]');
 
         const response = await Promise.all([
@@ -87,6 +91,8 @@ export default async function startZoomClass(link: string, className: string): P
         ]);
 
         await page.goto(response[1].url());
+
+        await page.screenshot({ path: 'fake.png' });
 
         const iframeElement = await page.$('iframe');
 
