@@ -112,13 +112,13 @@ export default async function startZoomClass(link: string, className: string): P
 
         await frame.click('button[type=button]');
         try {
-            await frame.waitForSelector('div[class="preview-video__control-button-container"]', {
+            await frame.waitForSelector('div[class="preview-video__control-button-container simple"]', {
                 timeout: 5000
             });
 
-            await frame.click('div[class="preview-video__control-button-container"]');
+            await frame.click('div[class="preview-video__control-button-container simple"]');
 
-            await frame.click('div[class="preview-video__control-button-container"]');
+            await frame.click('div[class="preview-video__control-button-container simple"]');
 
             logger.warn('Отлично подключили звук для конференции, она еще не началась');
 
