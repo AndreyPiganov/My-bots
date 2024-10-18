@@ -22,9 +22,9 @@ export default async function startZoomClass(link: string, className: string): P
                 // '--use-file-for-fake-audio-capture=./assets/micro.wav',
                 '--allow-file-access',
                 '--no-sandbox',
-                '--disable-setuid-sandbox',
-                '--accept-cookies', // Пробуем автоматически принимать cookies
-                '--disable-features=SameSiteByDefaultCookies' // Отключение обработки SameSite
+                '--disable-setuid-sandbox'
+                // '--accept-cookies', // Пробуем автоматически принимать cookies
+                // '--disable-features=SameSiteByDefaultCookies' // Отключение обработки SameSite
             ],
             ignoreDefaultArgs: ['--mute-audio']
         });
