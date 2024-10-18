@@ -17,6 +17,10 @@ export default async function exclusiveScript(frame: Frame, page: Page) {
 
         await frame.click('div[id="chat"]');
 
+        await delay(10000);
+
+        await page.screenshot({ path: 'screens/chat.png' });
+
         let foundEl: ElementHandle | null;
         let viewLast: ElementHandle | null;
         let found = false;
