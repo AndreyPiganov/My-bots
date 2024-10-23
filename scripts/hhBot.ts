@@ -5,6 +5,7 @@ import formatTime from '../src/utils/formatTime';
 import { ConfigService } from '@nestjs/config';
 import fs from 'fs';
 import path from 'path';
+import delay from 'src/utils/delay';
 
 export default async function runHHBot(): Promise<void> {
     const userDataDir = './session/hh';
@@ -69,10 +70,15 @@ export default async function runHHBot(): Promise<void> {
 
             await page.click('button[data-qa="account-login-submit"]');
         }
+        await delay(10000);
+
+        await page.screenshot({ path: 'screens/hhLogin.png' });
 
         await page.waitForSelector('a[data-qa="mainmenu_myResumes"');
 
         await page.click('a[data-qa="mainmenu_myResumes"]');
+
+        await page.screenshot({ path: 'screens/myResumesHH' });
 
         logger.info('Бот заходит в резюме');
 
