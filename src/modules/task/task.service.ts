@@ -11,6 +11,7 @@ import startOdinOnline from 'scripts/odinOnlineBot';
 import startZoomClass from 'scripts/runZoomBot';
 import { TaskWithSubject } from './dto/taskWithSubject';
 import runWithRetries from '../../utils/runWithRetries'; //
+import startKonturClass from 'scripts/runKonturBot';
 
 @Injectable()
 export class TaskService implements OnModuleInit {
@@ -197,6 +198,11 @@ export class TaskService implements OnModuleInit {
                     case 'ZOOM':
                         this.logger.log(`Запуск скрипта для Zoom конференции для задачи ${task.id}`);
                         await runWithRetries(() => startZoomClass(task.subject.link, task.subject.name));
+                        break;
+
+                    case 'KONTUR':
+                        this.logger.log(`Запуск скрипта для Kontur конференции для задачи ${task.id}`);
+                        await runWithRetries(() => startKonturClass(task.subject.konturLink, task.subject.name));
                         break;
 
                     default:

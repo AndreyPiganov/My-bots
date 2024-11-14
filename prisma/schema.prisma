@@ -12,6 +12,7 @@ model subjects {
     id          Int       @id @default(autoincrement())
     name        String    @db.VarChar  @unique
     link        String    @db.VarChar
+    konturLink  String?   @db.VarChar
     tasks       tasks[]
     created_at  DateTime  @default(now())
     updated_at  DateTime  @updatedAt
@@ -31,4 +32,5 @@ enum TaskType {
     ZOOM
     HH
     ODIN
+    KONTUR
 }

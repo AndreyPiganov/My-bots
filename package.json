@@ -34,7 +34,8 @@
         "start:dev": "npx prisma migrate dev && nest start --watch",
         "start:debug": "npx prisma migrate dev && nest start --debug --watch",
         "start:prod": "npx prisma migrate dev && node dist/main",
-        "start:zoom": "rm -rf dist && tsc && node dist/scripts/runZoomBot.js"
+        "start:zoom": "rm -rf dist && tsc && node dist/scripts/runZoomBot.js",
+        "start:kontur": "rm -rf dist && tsc && node dist/scripts/runKonturBot.js"
     },
     "devDependencies": {
         "@nestjs/cli": "^10.4.5",

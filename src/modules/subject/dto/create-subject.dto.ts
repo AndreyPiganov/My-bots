@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, IsString } from 'class-validator';
+import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class CreateSubjectDto {
     @ApiProperty({
@@ -17,4 +17,12 @@ export class CreateSubjectDto {
     @IsString()
     @IsNotEmpty()
     name: string;
+
+    @IsString()
+    @IsOptional()
+    @ApiProperty({
+        description: 'линк контур конфренции для подключения к занятию по данному предмету',
+        example: 'link Kontur конфренции'
+    })
+    konturLink?: string;
 }
