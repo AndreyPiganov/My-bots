@@ -25,6 +25,7 @@ services:
             - API_PROXY_KEY=${API_PROXY_KEY}
             - API_KEY=${API_KEY}
             # - DEBUG=puppeteer:*
+        privileged: true
     postgres:
         image: postgres:16-alpine
         container_name: bots_db
