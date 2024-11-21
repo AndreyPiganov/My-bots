@@ -4,7 +4,6 @@ import { getCurrentDay } from '../src/utils/getCurrentDay';
 import logger from '../src/utils/logger';
 import delay from '../src/utils/delay';
 import exclusiveKonturScript from './exclusiveKonturScript';
-// import exclusiveScript from './exclusiveScript';
 
 export default async function startKonturClass(link: string, className: string): Promise<void> {
     try {
@@ -75,6 +74,8 @@ export default async function startKonturClass(link: string, className: string):
 
         await page.screenshot({ path: 'screens/screenshotKontur.png' });
 
+        await delay(5000);
+
         const offMic = await page.$('button[aria-label="Выключить микрофон"]');
 
         if (offMic) {
@@ -87,6 +88,8 @@ export default async function startKonturClass(link: string, className: string):
             await page.waitForSelector('button[aria-label="Turn off microphone"]');
 
             await page.click('button[aria-label="Turn off microphone"]');
+
+            await delay(2000);
 
             await page.waitForSelector('button[aria-label="Turn off camera"]');
 
