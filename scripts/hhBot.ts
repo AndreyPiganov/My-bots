@@ -74,9 +74,9 @@ export default async function runHHBot(): Promise<void> {
 
         await page.screenshot({ path: 'screens/hhLogin.png' });
 
-        await page.waitForSelector('a[data-qa="mainmenu_myResumes"');
+        await page.waitForSelector('a div[data-qa="mainmenu_myResumes"');
 
-        await page.click('a[data-qa="mainmenu_myResumes"]');
+        await page.click('a div[data-qa="mainmenu_myResumes"');
 
         await page.screenshot({ path: 'screens/myResumesHH.png' });
 
