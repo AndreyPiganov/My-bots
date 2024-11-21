@@ -87,7 +87,7 @@ export default async function startKonturClass(link: string, className: string):
 
             await page.click('button[aria-label="Turn off microphone"]');
 
-            await delay(2000);
+            await delay(3000);
 
             await page.waitForSelector('button[aria-label="Turn off camera"]');
 
