@@ -56,15 +56,19 @@ export default async function startKonturClass(link: string, className: string):
 
         await page.goto(link, { waitUntil: 'networkidle2' });
 
+        await delay(3000);
+
         await page.waitForSelector('input[type="text"]');
 
         await page.type('input[type="text"]', 'Пиганов Андрей 3102д', { delay: 100 });
+
+        await delay(2000);
 
         await page.waitForSelector('button[type="submit"]');
 
         await page.click('button[type="submit"]');
 
-        await delay(1000);
+        await delay(3000);
 
         await page.waitForSelector('div[role="button"]');
 
