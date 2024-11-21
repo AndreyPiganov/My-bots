@@ -74,7 +74,7 @@ export default async function startKonturClass(link: string, className: string):
 
         await page.screenshot({ path: 'screens/screenshotKontur.png' });
 
-        await delay(5000);
+        await delay(1000);
 
         const offMic = await page.$('button[aria-label="Выключить микрофон"]');
 
